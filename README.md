@@ -29,8 +29,8 @@ This document describes how to display important PLC data such as alarms or devi
 
 The example reads out the PLC status and displays it in Machine Insight. 
 A status mapping can also be created in the Machine Insight Configurator with which the machine status can be read out and displayed. 
-The data is published on the data bus via the S7 Connector, where the Machine Insight Configurator can retrieve the required data. 
-First, the S7 Configurator and the data bus must be configured. Then select the correct PLC and the data bus in the Machine Insight Configurator. 
+The data is published on the Databus via the S7 Connector, where the Machine Insight Configurator can retrieve the required data. 
+First, the S7 Configurator and the Databus must be configured. Then select the correct PLC and the data bus in the Machine Insight Configurator. 
 The required machine status is created in the status mapping. 
 In Machine Insight you can see all alarms, error messages and the self-created machine status of the PLC. 
 
@@ -50,7 +50,9 @@ In Machine Insight you can see all alarms, error messages and the self-created m
 ### Used components
 
 - Industrial Edge Management (IEM) V1.1.0-46
+- S7 Connector Configurator V1.1.24
 - S7 Connector V1.1.18
+- IE Databus V1.1.24
 - IE Databus V1.1.15
 - Device Scanner 1.1.0
 - Machine Insight Conifgurator 1.1.5
