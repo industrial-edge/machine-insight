@@ -2,14 +2,14 @@
 
 This example shows how to use the Industrial Edge App “Machine Insight” 
 
-- [Machine Insight](#machine-insight)
+- [Machine Insight application example](#machine-insight-application-example)
   - [Description](#description)
     - [Overview](#overview)
     - [General task](#general-task)
   - [Requirements](#requirements)
     - [Prerequisities](#prerequisities)
     - [Used components](#used-components)
-    - [TIA project](#tia-project)
+    - [TIA Project](#tia-project)
   - [Configuration steps](#configuration-steps)
   - [Usage](#usage)
   - [Documentation](#documentation)
@@ -49,15 +49,15 @@ In Machine Insight you can see all alarms, error messages and the self-created m
 
 ### Used components
 
-- Industrial Edge Management (IEM) V1.1.0-46
-- S7 Connector Configurator V1.1.24
-- S7 Connector V1.1.18
-- IE Databus V1.1.24
-- IE Databus V1.1.15
-- Device Scanner 1.1.0
-- Machine Insight Conifgurator 1.1.5
-- Machine Insight 1.1.5
-- Industrial Edge Device V 1.1.0-54
+- Industrial Edge Management (IEM) V1.2.0-34
+- S7 Connector Configurator V1.2.32
+- S7 Connector V1.2.26
+- IE Databus Configurator V1.2.23
+- IE Databus V1.2.16
+- Device Scanner 1.1.1
+- Machine Insight Conifgurator 1.2.01
+- Machine Insight 1.2.01
+- Industrial Edge Device V 1.2.0-56
 - TIA Portal V16
 - S7-1511
 - Web browser (Mozilla or Chrome)
