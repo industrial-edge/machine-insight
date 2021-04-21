@@ -56,7 +56,7 @@ In Machine Insight you can see all alarms, error messages and the self-created m
 - IE Databus V1.2.16
 - Device Scanner 1.1.1
 - Machine Insight Conifgurator 1.2.01
-- Machine Insight 1.2.01
+- Machine Insight 1.2.01.
 - Industrial Edge Device V 1.2.0-56
 - TIA Portal V16
 - S7-1511
