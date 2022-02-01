@@ -74,13 +74,13 @@ The used TIA Portal project can be found in the [miscellenous repository](https:
 ## Configuration steps
 
 You can find the further information about the following steps in the [docs](docs/Installation.md)
+- Configure layer 2 access for the IED
 - Configure PLC Connection (Databus, S7 Connector)
-- Configure Machine Insight Configurator and Machine Inisght
+- Configure Machine Insight
 
 ## Usage
 
-Once the Machine Insight Configurator App is configured, alarms, diagnostic buffers and device status can be read from the PLC. 
-Now the data can be displayed and read in Machin Insight.
+Once the set up is done with the Machine Insight Configurator, we can open the UI of the Machine Insight application. Here the PLC data is displayed. We can see alarms, diagnostic buffers and device status can be read from the PLC. 
 
 ## Documentation
 
