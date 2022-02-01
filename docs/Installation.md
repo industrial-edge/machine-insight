@@ -1,7 +1,7 @@
 # Configuration
 
 - [Configuration](#configuration)
-  - [Configure Device Layer 2 access](#configure-device-layer_2_access)
+  - [Configure layer 2 access on IED](#configure-layer-2-access-on-IED)
   - [Configure PLC Connection](#configure-plc-connection)
     - [Configure Databus](#configure-databus)
     - [Configure S7 Connector](#configure-s7-connector)
@@ -9,27 +9,24 @@
     - [Configure Machine Insight Configurator](#configure-machine-insight-configurator)
     - [Configure Machine Insight Overview](#configure-maschine-insight-overview)
 
-## Configure Device Layer 2 access
+## Configuration
 
-The device scanner requires a layer 2 access to enable the scanner of the devices in the Machine Insight.
+To run the Machine Insight application, all the following applications must be deployed and configured in **the same IED**:
+- Device Scanner Service (for scan functionality)
+- IE Databus (for machine status feature)
+- S7 Connector (for machine status feature)
+- Machine Insight Configurator
+- Machine Insight
 
-Hint: Layer 2 access can only be configured for a new device, not later.
+## Configure layer 2 access on IED
 
-Open the management system and select "My Edge Devices" on the left side in the bar.
+The device scanner requires a **layer 2 access** on the IED to enable the scanner of the devices in the Machine Insight.
 
-Click on "+ New Edge Device" on the upper right side.
-
-Configure your Edge Device and click on "Next".
-
-Click on the "+" button at the top right to configure the network interface.
-
-![Configure_Device_New](graphics/Configure_Device_New.PNG)
-
-Configure the network interface and the layer 2 access and click on "add".
+To configure the layer 2 access, open the UI of the IED and in the menu go to Settings > Connectivity > LAN Network. For the network interface, that is connected to the PLC, the layer 2 access must be configured. Click the corresponding edit icon for that interface and add the needed.
 
 ![Confiture_Device_Layer_2_Access](graphics/Configure_Device_Layer_2_Access.PNG)
 
-Confirm the device configuration with "Next" and with "Create".
+![Configure device LAN](/docs/graphics/Configure_Device_LAN.PNG)
 
 ## Configure PLC Connection
 
