@@ -6,11 +6,9 @@
     - [Configure IE Databus](#configure-ie-databus)
     - [Configure S7 Connector](#configure-s7-connector)
   - [Configure Machine Insight](#configure-machine-insight)
-  - [Configure Machine Insight Overview](#configure-maschine-insight-overview)
-
-## Configuration
 
 To run the Machine Insight application, all the following applications must be deployed and configured in **the same IED**:
+
 - Device Scanner Service (for scan functionality)
 - IE Databus (for machine status feature)
 - S7 Connector (for machine status feature)
@@ -90,13 +88,13 @@ Click on "Start Scan" and select a device on which to connect to.
 
 To be able to subscribe to the dedicated machine status data from the Databus, expand the 'Configure Global Device Settings' and under section 'Databus Configuration' enter your databus username and password.
 
+![Machine_Insight_Global_Config](/docs/graphics/Machine_Insight_Global_Config.png)
+
 For the added device, go to column 'Status Mapping' and click 'Create new' to create a new mapping for the machine status. Assign a name to the status mapping and define proper values and labels for this status mapping.
 
 ![Machine_Insight_Status_Mapping](/docs/graphics/Machine_Insight_StatusMapping.png)
 
 Back in the global settings window, select the just created status mapping for the device. To assign a tag for the machine state, click the folder icon under 'Actions'.
-
-![Machine_Insight_Overall_Config](/docs/graphics/Machine_Insight_Overall_Config.png)
 
 If you choose the meta data topic for the S7 Connector and the according connection, all available tags are listed. Select the proper tag for the machine status.
 
@@ -104,20 +102,10 @@ If you choose the meta data topic for the S7 Connector and the according connect
 
 Finally select the device and continue to 'Settings' at the top right.
 
+![Machine_Insight_Overall_Config](/docs/graphics/Machine_Insight_Overall_Config.png)
 
+Under tab 'General' you can change general settings like language or the time zone. Under tab 'Diagnostic Data' you can define the number of diagnostic events that are retained. Furthermore you can select the diagnostic events data type for which the data is extracted (Diagnostic Buffer OR Alarms).
 
-![Machine_Insight_Configurator_Settings](/docs/graphics/Machine_Insight_Configurator_Settings.PNG)
+To apply all settings, click on "Update" in the top right corner.
 
-To apply all settings, click on "Deploy" in the top right-hand corner.
-
-To get to the Machine Insight view, click on "Go to App".
-
-![Machine_Insight_Configurator_Settings_Deploy](/docs/graphics/Machine_Insight_Configurator_Settings_Deploy.PNG)
-
-## Configure Machine Insight Overview
-
-Select your device in the top left-hand corner to access the overview.
-
-Here you can see the device status, notification icon and mapping status.
-
-![Machine_Insight_Overview](/docs/graphics/Machine_Insight_Overview.PNG)
+To open the Machine Insight view, you can click on "Go to App" or open the UI of the application via the IED.
