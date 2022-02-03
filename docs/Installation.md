@@ -88,12 +88,23 @@ Click on "Start Scan" and select a device on which to connect to.
 
 ![Machine_Insight_Scan](/docs/graphics/Machine_Insight_Scan.png)
 
+To be able to subscribe to the dedicated machine status data from the Databus, expand the 'Configure Global Device Settings' and under section 'Databus Configuration' enter your databus username and password.
+
+For the added device, go to column 'Status Mapping' and click 'Create new' to create a new mapping for the machine status. Assign a name to the status mapping and define proper values and labels for this status mapping.
+
+![Machine_Insight_Status_Mapping](/docs/graphics/Machine_Insight_StatusMapping.png)
+
+Back in the global settings window, select the just created status mapping for the device. To assign a tag for the machine state, click the folder icon under 'Actions'.
+
+![Machine_Insight_Overall_Config](/docs/graphics/Machine_Insight_Overall_Config.png)
+
+If you choose the meta data topic for the S7 Connector and the according connection, all available tags are listed. Select the proper tag for the machine status.
+
+![Machine_Insight_Tags](/docs/graphics/Machine_Insight_Tags.png)
+
+Finally select the device and continue to 'Settings' at the top right.
 
 
-
-![Machine_Insight_Configurator_Scan_Configuration](/docs/graphics/Machine_Insight_Configurator_Scan_Configuration.PNG)
-
-Select a device and click on "Settings" at the top right.
 
 ![Machine_Insight_Configurator_Settings](/docs/graphics/Machine_Insight_Configurator_Settings.PNG)
 
