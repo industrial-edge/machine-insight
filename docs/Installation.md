@@ -3,7 +3,7 @@
 - [Configuration](#configuration)
   - [Configure layer 2 access on IED](#configure-layer-2-access-on-IED)
   - [Configure PLC Connection](#configure-plc-connection)
-    - [Configure Databus](#configure-databus)
+    - [Configure IE Databus](#configure-ie-databus)
     - [Configure S7 Connector](#configure-s7-connector)
   - [Configure Machine Insight](#configure-machine-insight)
     - [Configure Machine Insight Configurator](#configure-machine-insight-configurator)
@@ -20,33 +20,30 @@ To run the Machine Insight application, all the following applications must be d
 
 ## Configure layer 2 access on IED
 
-The device scanner requires a **layer 2 access** on the IED to enable the scanner of the devices in the Machine Insight.
+The Device Scanner Service is optional but required to be able to use the scan functionality in Machine Insight Configurator. It requires a **layer 2 access** on the IED to work properly.
 
 To configure the layer 2 access, open the UI of the IED and in the menu go to Settings > Connectivity > LAN Network. For the network interface, that is connected to the PLC, the layer 2 access must be configured. Click the corresponding edit icon for that interface and add the needed.
 
-![Confiture_Device_Layer_2_Access](graphics/Configure_Device_Layer_2_Access.PNG)
-
 ![Configure device LAN](/docs/graphics/Configure_Device_LAN.PNG)
+![Confiture_Device_Layer_2_Access](graphics/Configure_Device_Layer_2_Access.PNG)
 
 ## Configure PLC Connection
 
-To read data from the PLC and provide the data, we will use S7 Connector to establish connection with the PLC via OPC UA.
-
-The S7 Connector sends the data to the Databus, where the Data Service app can collect what is needed.
+The IE Databus is optional but required to be able to use the machine status feature in Machine Insight Configurator. To read data from the PLC, we will use the S7 Connector to establish a connection via OPC UA and publish the PLC data on the Databus.
 
 In order to build this infrastructure, these apps must be configured properly:
 
-- Databus
+- IE Databus
 - S7 Connector
 
-### Configure Databus
+Hint: Username and password should be the same for all system apps, e.g. "edge" / "edge".
 
-In your IEM open the Databus and launch the configurator.
+### Configure IE Databus
+
+In your IEM open the IE Databus and launch the configurator.
 
 Add a user with this topic:
 `"ie/#"`
-
-![ie_databus_user](graphics/IE_Databus_User.PNG)
 
 ![ie_databus](graphics/IE_Databus.PNG)
 
@@ -67,8 +64,6 @@ Add needed tags:
 Edit the settings:
 
 ![s7_connector_settings](graphics/S7_Connector_Settings.PNG)
-
-Hint: Username and password should be the same for all system apps, e.g. "edge" / "edge".
 
 Deploy and start the project.
 
