@@ -17,9 +17,9 @@ To run the Machine Insight application, all the following applications must be d
 
 ## Configuration for Device Scanner Service
 
-The Device Scanner Service is **optional** but required to be able to use the **scan functionality** in Machine Insight Configurator. It requires a **layer 2 access** on the IED to work properly.
+The Device Scanner Service is **optional** but required to be able to use the **scan functionality** in Machine Insight Configurator. It requires a specific network configuration called **Layer-2-Access** on the IED to work properly. Here you define an address pool used by Docker to configure a container IP address for the Device Scanner Service.
 
-To configure the layer 2 access, open the UI of the IED and in the menu go to Settings > Connectivity > LAN Network. For the network interface, that is connected to the PLC, the layer 2 access must be configured. Click the corresponding edit icon for that interface and add the needed.
+To configure the Layer-2-Access, open the UI of the IED and in the menu go to Settings > Connectivity > LAN Network. For the network interface, that is connected to the PLC, the Layer-2-Access must be configured. Click the corresponding edit icon for that interface and add the needed.
 
 ![Configure device LAN](/docs/graphics/Configure_Device_LAN.PNG)
 ![Confiture_Device_Layer_2_Access](/docs/graphics/Configure_Device_Layer_2_Access.PNG)
