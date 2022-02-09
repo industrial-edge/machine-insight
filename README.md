@@ -80,19 +80,25 @@ You can find the further information about the following steps in the [docs](doc
 
 ## Usage
 
-Once the set up is done with the Machine Insight Configurator, we can open the UI of the Machine Insight application.
+Once the set up is done with the Machine Insight Configurator, you can open the UI of the Machine Insight application.
 
 Select your device in the menu on the left side. In the overview tab you can see a Gantt chart and logbook records. The Gantt chart displays the following data:
 
-- Machine Status based on configured status mapping
-- Device Status of PLC ...
-- Notification Icons ...
-
-?? Here the PLC data is displayed. We can see alarms, diagnostic buffers and device status can be read from the PLC. 
-?? Here you can see the device status, notification icon and mapping status.
+- Machine status based on configured status mapping
+- Current device status of PLC
+- Notification icons (alarm data, user program change, hardware configuration change, firmware update, textlist change, fail-safe program change)
 
 ![Machine_Insight_Overview](/docs/graphics/Machine_Insight_Overview.PNG)
 
+> Hint: PLC notifications are collected for every ten seconds and diagnostic buffer data is collected for every minute. Therefore, you may experience a delay in the Gantt chart or in the logbook.
+
+The Gantt chart allows you to zoom in and view e.g. the machine status in detail.
+
+![Machine_Insight_Machine_Status](/docs/graphics/Machine_Insight_Machine_Status.png)
+
+By clicking on 'Legend' within the Gantt chart, you can see all current states.
+
+![Machine_Insight_Legend](/docs/graphics/Machine_Insight_Legend.png)
 
 ## Documentation
 
