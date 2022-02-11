@@ -50,9 +50,9 @@ In Machine Insight you can see all alarms, error messages and the self-created m
 ### Used components
 
 - Industrial Edge Management (IEM) V1.2.0-34
-- S7 Connector Configurator V1.2.32
+- S7 Connector Configurator V1.2.38
 - S7 Connector V1.2.26
-- IE Databus Configurator V1.2.23
+- IE Databus Configurator V1.2.29
 - IE Databus V1.2.16
 - Device Scanner 1.1.1
 - Machine Insight Conifgurator 1.2.01
