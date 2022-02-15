@@ -60,6 +60,8 @@ Using Machine Insight the PLC data can be visualized and analyzed via a Gantt ch
 - Industrial Edge App Publisher V1.4.3
 - Docker Engine V20.10.10
 - Docker Compose V1.28.5
+- TIA Portal V16
+- PLC: CPU 1515F-2
 
 The **Device Scanner Service** is optional but required for using the scan functionality in Machine Insight Configurator.
 
