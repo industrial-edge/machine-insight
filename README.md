@@ -1,6 +1,6 @@
 # Machine Insight application example
 
-This example shows how to use the Industrial Edge App “Machine Insight” 
+This guide shows how to use the Industrial Edge application Machine Insight.
 
 - [Machine Insight application example](#machine-insight-application-example)
   - [Description](#description)
@@ -21,47 +21,51 @@ This example shows how to use the Industrial Edge App “Machine Insight”
 
 ### Overview
 
-This document describes how to display important PLC data such as alarms or device status in Machine Insight.
+The application Machine Insight is a condition monitoring application which enables easy and efficient remote diagnosis of the machines. It provides global comprehensive view of assembly lines and machines and provides transparency about your machine to improve your service processes.
 
-![overview](docs/graphics/Overview.PNG)
+The Machine Insight application enables you to extract the data from the different sources. The data may be of different types: device status data, machine status data, alarms, diagnostic buffer data, and program changes or firmware updates on PLC.
+
+This repository describes how to display important PLC data such as alarms or device status in Machine Insight.
+
+![overview](docs/graphics/Overview.png)
 
 ### General task
 
-The example reads out the PLC status and displays it in Machine Insight. 
-A status mapping can also be created in the Machine Insight Configurator with which the machine status can be read out and displayed. 
-The data is published on the Databus via the S7 Connector, where the Machine Insight Configurator can retrieve the required data. 
-First, the S7 Configurator and the Databus must be configured. Then select the correct PLC and the data bus in the Machine Insight Configurator. 
-The required machine status is created in the status mapping. 
-In Machine Insight you can see all alarms, error messages and the self-created machine status of the PLC. 
+The guide shows how to use the Machine Insight Configurator for configuring the data exchange with a PLC. Data collection can be configured either for alarms or for diagnostic buffer. Furthermore a status mapping is created to collect machine status data. The data comes in via the S7 Connector and then published on the Databus, where the Machine Insight Configurator can retrieve the required data.
+
+Using Machine Insight the PLC data can be visualized and analyzed via a Gantt chart. Here you can see differnet PLC data, e.g. diagnostic buffer data, alarms, device status or firmware updates.
 
 ## Requirements
 
 ###  Prerequisities
 
-- Access to an Industrial Edge Management System (IEM)
-- Onboarded Industial Edge Device on IEM
-- Installed System Configurators for Databus and S7 Connector
-- Installed System Apps Databus and S7 Connector
-- Installed Apps Device Scanner, Machine Insight Configurator and Machine Insight
-- Edge device is connected to PLC
-- TIA portal project loaded on PLC (e.g. for filling application)
-- Google Chrome (Version ≥ 72) or Firefox (Version ≥ 62)
+- Access to an Industrial Edge Management (IEM) with onboarded Industrial Edge Device (IED)
+- Installed system configurators and apps (see list "Used components")
+- Installed apps (see list "Used components")
+- IED is connected to PLC
+- TIA portal project loaded on PLC
+- Google Chrome (Version ≥ 72)
 
 ### Used components
 
-- Industrial Edge Management (IEM) V1.2.0-34
-- S7 Connector Configurator V1.2.38
-- S7 Connector V1.2.26
-- IE Databus Configurator V1.2.29
-- IE Databus V1.2.16
-- Device Scanner 1.1.1
-- Machine Insight Conifgurator 1.2.01
-- Machine Insight 1.2.01
-- Industrial Edge Device V 1.2.0-56
+- Industrial Edge Management (IEM) V1.4.0-42 / V1.4.11
+  - IE Databus Configurator V 1.5.5
+  - S7 Connector Configurator V 1.5.0-17
+- Industrial Edge Device (IED) V 1.2.0-56
+  - IE Databus V 1.5.3
+  - S7 Connector V 1.5.0-25
+  - Device Scanner Service V 1.0.2
+  - Machine Insight Conifgurator V 1.3.1
+  - Machine Insight V 1.3.1
+- Industrial Edge App Publisher V1.4.3
+- Docker Engine V20.10.10
+- Docker Compose V1.28.5
 - TIA Portal V16
-- S7-1511
-- Web browser (Mozilla or Chrome)
+- PLC: CPU 1515F-2
 
+The **Device Scanner Service** is optional but required for using the scan functionality in Machine Insight Configurator.
+
+The **S7 Connector** and the **IE Databus** are optional but required for using the machine status feature in Machine Insight Configurator.
 
 ### TIA Project
 
@@ -70,13 +74,31 @@ The used TIA Portal project can be found in the [miscellenous repository](https:
 ## Configuration steps
 
 You can find the further information about the following steps in the [docs](docs/Installation.md)
+- Configuration for Device Scanner Service
 - Configure PLC Connection (Databus, S7 Connector)
-- Configure Machine Insight Configurator and Machine Inisght
+- Configure Machine Insight
 
 ## Usage
 
-Once the Machine Insight Configurator App is configured, alarms, diagnostic buffers and device status can be read from the PLC. 
-Now the data can be displayed and read in Machin Insight.
+Once the set up is done with the Machine Insight Configurator, you can open the UI of the Machine Insight application.
+
+Select your device in the menu on the left side. In the overview tab you can see a Gantt chart and logbook records. The Gantt chart displays the following data:
+
+- Machine status based on configured status mapping
+- Current device status of PLC
+- Notification icons (alarm data, user program change, hardware configuration change, firmware update, textlist change, fail-safe program change)
+
+![Machine_Insight_Overview](/docs/graphics/Machine_Insight_Overview.PNG)
+
+> Hint: PLC notifications are collected for every ten seconds and diagnostic buffer data is collected for every minute. Therefore, you may experience a delay in the Gantt chart or in the logbook.
+
+The Gantt chart allows you to zoom in and view e.g. the machine status in detail.
+
+![Machine_Insight_Machine_Status](/docs/graphics/Machine_Insight_Machine_Status.png)
+
+By clicking on 'Legend' within the Gantt chart, you can see all current states.
+
+![Machine_Insight_Legend](/docs/graphics/Machine_Insight_Legend.png)
 
 ## Documentation
 

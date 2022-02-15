@@ -1,57 +1,50 @@
 # Configuration
 
 - [Configuration](#configuration)
-  - [Configure Device Layer 2 access](#configure-device-layer_2_access)
+  - [Configuration for Device Scanner Service](#configuration-for-device-scanner-service)
   - [Configure PLC Connection](#configure-plc-connection)
-    - [Configure Databus](#configure-databus)
+    - [Configure IE Databus](#configure-ie-databus)
     - [Configure S7 Connector](#configure-s7-connector)
   - [Configure Machine Insight](#configure-machine-insight)
-    - [Configure Machine Insight Configurator](#configure-machine-insight-configurator)
-    - [Configure Machine Insight Overview](#configure-maschine-insight-overview)
 
-## Configure Device Layer 2 access
+To run the Machine Insight application, all the following applications must be deployed and configured in **the same IED**:
 
-The device scanner requires a layer 2 access to enable the scanner of the devices in the Machine Insight.
+- Device Scanner Service (for scan functionality)
+- IE Databus (for machine status feature)
+- S7 Connector (for machine status feature)
+- Machine Insight Configurator
+- Machine Insight
 
-Hint: Layer 2 access can only be configured for a new device, not later.
+## Configuration for Device Scanner Service
 
-Open the management system and select "My Edge Devices" on the left side in the bar.
+The Device Scanner Service is **optional** but required to be able to use the **scan functionality** in Machine Insight Configurator. It requires a specific network configuration called **Layer-2-Access** on the IED to work properly. Here you define an address pool used by Docker to configure a container IP address for the Device Scanner Service.
 
-Click on "+ New Edge Device" on the upper right side.
+To configure the Layer-2-Access, open the UI of the IED and in the menu go to Settings > Connectivity > LAN Network. For the network interface, that is connected to the PLC, the Layer-2-Access must be configured. Click the corresponding edit icon for that interface and add the needed.
 
-Configure your Edge Device and click on "Next".
+![Configure device LAN](/docs/graphics/Configure_Device_LAN.PNG)
+![Confiture_Device_Layer_2_Access](/docs/graphics/Configure_Device_Layer_2_Access.PNG)
 
-Click on the "+" button at the top right to configure the network interface.
-
-![Configure_Device_New](graphics/Configure_Device_New.PNG)
-
-Configure the network interface and the layer 2 access and click on "add".
-
-![Confiture_Device_Layer_2_Access](graphics/Configure_Device_Layer_2_Access.PNG)
-
-Confirm the device configuration with "Next" and with "Create".
+Make sure the Device Scanner Service is running on the IED.
 
 ## Configure PLC Connection
 
-To read data from the PLC and provide the data, we will use S7 Connector to establish connection with the PLC via OPC UA.
-
-The S7 Connector sends the data to the Databus, where the Data Service app can collect what is needed.
+The IE Databus is **optional** but required to be able to use the **machine status feature** in Machine Insight Configurator. To read data from the PLC, we will use the S7 Connector to establish a connection via OPC UA and publish the PLC data on the Databus.
 
 In order to build this infrastructure, these apps must be configured properly:
 
-- Databus
+- IE Databus
 - S7 Connector
 
-### Configure Databus
+Hint: Username and password should be the same for all system apps, e.g. "edge" / "edge".
 
-In your IEM open the Databus and launch the configurator.
+### Configure IE Databus
+
+In your IEM open the IE Databus and launch the configurator.
 
 Add a user with this topic:
 `"ie/#"`
 
-![ie_databus_user](graphics/IE_Databus_User.PNG)
-
-![ie_databus](graphics/IE_Databus.PNG)
+![ie_databus](/docs/graphics/IE_Databus.PNG)
 
 Deploy the configuration.
 
@@ -61,60 +54,58 @@ In your IEM open the S7 Connector and launch the configurator.
 
 Add a data source:
 
-![S7 Connector Data Source](graphics/S7_Connector_Data_Source.PNG)
+![S7 Connector Data Source](/docs/graphics/S7_Connector_Data_Source.PNG)
 
-Add needed tags:
+Add the needed tag for the machine status:
 
-![s7_connector_config](graphics/S7_Connector_Configuration.PNG)
+![s7_connector_config](/docs/graphics/S7_Connector_Configuration.PNG)
 
 Edit the settings:
 
-![s7_connector_settings](graphics/S7_Connector_Settings.PNG)
-
-Hint: Username and password should be the same for all system apps, e.g. "edge" / "edge".
+![s7_connector_settings](/docs/graphics/S7_Connector_Settings.PNG)
 
 Deploy and start the project.
 
 ## Configure Machine Insight
 
-In your IED Web UI open the app Machine Insight Configurator.
+The Machine Insight Configurator provides the user interface to configure the Machine Insight application for data extraction from field devices and to collect machine status from a different application and store it in database.
 
-Hint: Before the Machine Insight can be configured, the Device Scanner must be installed on the IED.
+In your IED open the Machine Insight Configurator.
 
-### Configure Machine Insight Configurator
+Click "Add New Device" and choose "Scan and Add" to automatically scan the network for all available devices in the network. If you are looking for a specific device with name and IP, choose "Manually Add".
 
-Click "Add New Device" at the top of the left side.
+![Machine_Insight_Configurator](/docs/graphics/Machine_Insight_Configurator.PNG)
 
-![Machine_Insight_Configurator](graphics/Machine_Insight_Configurator.PNG)
+In the scan configuration window enter the following information:
 
-Click on "Scan and Add" to automatically scan the network and see all devices on the network.
+- Service Name: industrial-device-scanner (should be prefilled)
+- Port: 50020 (should be prefilled)
+- IP range From and To: enter IP adresses in which to be scanned for devices
 
-If you are looking for a specific device with name and IP, click on "Manually Add".
+Click on "Start Scan" and select a device on which to connect to.
 
-![Machine_Insight_Configurator_Add](graphics/Machine_Insight_Configurator_Add.PNG)
+![Machine_Insight_Scan](/docs/graphics/Machine_Insight_Scan.png)
 
-Enter the IP range in which the devices are to be searched.
+To be able to subscribe to the dedicated machine status data from the Databus, expand the 'Configure Global Device Settings' and under section 'Databus Configuration' enter your databus username and password.
 
-Click on "Start Scan" and select the device on the left side by clicking on it.
+![Machine_Insight_Global_Config](/docs/graphics/Machine_Insight_Global_Config.png)
 
-To save, click on the "Save & Close" button at the bottom left.
+For the added device, go to column 'Status Mapping' and click 'Create new' to create a new mapping for the machine status. Assign a name to the status mapping and define proper values and labels for this status mapping.
 
-![Machine_Insight_Configurator_Scan_Configuration](graphics/Machine_Insight_Configurator_Scan_Configuration.PNG)
+![Machine_Insight_Status_Mapping](/docs/graphics/Machine_Insight_StatusMapping.png)
 
-Select a device and click on "Settings" at the top right.
+Back in the global settings window, select the just created status mapping for the device. To assign a tag for the machine state, click the folder icon under 'Actions'.
 
-![Machine_Insight_Configurator_Settings](graphics/Machine_Insight_Configurator_Settings.PNG)
+If you choose the meta data topic for the S7 Connector and the according connection, all available tags are listed. Select the proper tag for the machine status.
 
-To apply all settings, click on "Deploy" in the top right-hand corner.
+![Machine_Insight_Tags](/docs/graphics/Machine_Insight_Tags.png)
 
-To get to the Machine Insight view, click on "Go to App".
+Finally select the device and continue to 'Settings' at the top right.
 
-![Machine_Insight_Configurator_Settings_Deploy](graphics/Machine_Insight_Configurator_Settings_Deploy.PNG)
+![Machine_Insight_Overall_Config](/docs/graphics/Machine_Insight_Overall_Config.png)
 
-### Configure Machine Insight Overview
+Under tab 'General' you can change general settings like language or the time zone. Under tab 'Diagnostic Data' you can define the number of diagnostic events that are retained. Furthermore you can select the diagnostic events data type for which the data is extracted (Diagnostic Buffer OR Alarms).
 
-Select your device in the top left-hand corner to access the overview.
+To apply all settings, click on "Update" in the top right corner.
 
-Here you can see the device status, notification icon and mapping status.
-
-![Machine_Insight_Overview](graphics/Machine_Insight_Overview.PNG)
+To open the Machine Insight view, you can click on "Go to App" or open the UI of the application via the IED.
