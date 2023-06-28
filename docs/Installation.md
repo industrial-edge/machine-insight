@@ -28,7 +28,7 @@ Make sure the Device Scanner Service is running on the IED.
 
 ## Configure PLC Connection
 
-The IE Databus is **optional** but required to be able to use the **machine status feature** in Machine Insight Configurator. To read data from the PLC, we will use the OPC UA Connector to establish a connection via OPC UA and publish the PLC data on the Databus.
+The IE Databus is **optional** but required to be able to use the **machine status feature** in Machine Insight Configurator. To read data from the PLC, we will use the OPC UA Connector to establish a connection and publish the PLC data on the Databus.
 
 In order to build this infrastructure, these apps must be configured properly:
 
