@@ -48,18 +48,18 @@ Using Machine Insight the PLC data can be visualized and analyzed via a Gantt ch
 
 ### Used components
 
-- Industrial Edge Management (IEM) V1.4.0-42 / V1.4.11
-  - IE Databus Configurator V 1.5.5
-  - S7 Connector Configurator V 1.5.0-17
-- Industrial Edge Device (IED) V 1.2.0-56
-  - IE Databus V 1.5.3
-  - S7 Connector V 1.5.0-25
-  - Device Scanner Service V 1.0.2
-  - Machine Insight Conifgurator V 1.3.1
-  - Machine Insight V 1.3.1
-- Industrial Edge App Publisher V1.4.3
-- Docker Engine V20.10.10
-- Docker Compose V1.28.5
+- Industrial Edge Management (IEM) V 1.5.2-4 / V 1.11.8
+  - Databus Configurator V 2.0.0-5
+  - Common Connector Configurator V 1.8.1-4
+- Industrial Edge Device (IED) V 1.10.0.-9
+  - Databus V 2.1.0-4
+  - OPC UA Connector V 1.8.1-6
+  - Device Scanner Service V 1.6.0
+  - Machine Insight Conifgurator V 1.3.2
+  - Machine Insight V 1.3.2
+- Industrial Edge App Publisher V 1.10.5
+- Docker Engine V 20.10.10
+- Docker Compose V 1.28.5
 - TIA Portal V16
 - PLC: CPU 1515F-2
 
@@ -101,19 +101,26 @@ By clicking on 'Legend' within the Gantt chart, you can see all current states.
 ![Machine_Insight_Legend](/docs/graphics/Machine_Insight_Legend.png)
 
 ## Documentation
-
-You can find further documentation and help in the following links
-  - [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/#/documentation)
-  - [Industrial Edge Forum](https://www.siemens.com/industrial-edge-forum)
-  - [Industrial Edge landing page](https://new.siemens.com/global/en/products/automation/topic-areas/industrial-edge/simatic-edge.html)
-  
+- You can find further documentation and help in the following links
+  - [Industrial Edge Hub]( https://iehub.eu1.edge.siemens.cloud/#/documentation)
+  - [Industrial Edge Forum]( https://forum.mendix.com/link/space/industrial-edge)
+  - [Industrial Edge landing page]( https://new.siemens.com/global/en/products/automation/topic-areas/industrial-edge/simatic-edge.html)
+  - [Industrial Edge GitHub page]( https://github.com/industrial-edge)
+  - [Industrial Edge documentation page]( https://docs.eu1.edge.siemens.cloud/index.html)
+ 
 ## Contribution
-
+ 
 Thank you for your interest in contributing. Anybody is free to report bugs, unclear documentation, and other problems regarding this repository in the Issues section.
 Additionally everybody is free to propose any changes to this repository using Pull Requests.
-
+ 
 If you are interested in contributing via Pull Request, please check the [Contribution License Agreement](Siemens_CLA_1.1.pdf) and forward a signed copy to [industrialedge.industry@siemens.com](mailto:industrialedge.industry@siemens.com?subject=CLA%20Agreement%20Industrial-Edge).
+ 
+## License and Legal Information
+ 
+Please read the [Legal information](LICENSE.txt).
 
-## Licence and Legal Information
+## Disclaimer
 
-Please read the [Legal information](LICENSE.md).
+IMPORTANT - PLEASE READ CAREFULLY:
+
+This documentation describes how you can download and set up containers which consist of or contain third-party software. By following this documentation you agree that using such third-party software is done at your own discretion and risk. No advice or information, whether oral or written, obtained by you from us or from this documentation shall create any warranty for the third-party software. Additionally, by following these descriptions or using the contents of this documentation, you agree that you are responsible for complying with all third party licenses applicable to such third-party software. All product names, logos, and brands are property of their respective owners. All third-party company, product and service names used in this documentation are for identification purposes only. Use of these names, logos, and brands does not imply endorsement.
