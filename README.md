@@ -27,7 +27,7 @@ The Machine Insight application enables you to extract the data from the differe
 
 This repository describes how to display important PLC data such as alarms or device status in Machine Insight.
 
-![overview](docs/graphics/Overview.PNG)
+![overview](/machine-insight-getting-started/docs/graphics/Overview.PNG)
 
 ### General task
 
