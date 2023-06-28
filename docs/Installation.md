@@ -22,7 +22,7 @@ The Device Scanner Service is **optional** but required to be able to use the **
 To configure the Layer-2-Access, open the UI of the IED and in the menu go to Settings > Connectivity > LAN Network. For the network interface, that is connected to the PLC, the Layer-2-Access must be configured. Click the corresponding edit icon for that interface and add the needed.
 
 ![Configure device LAN](/docs/graphics/Configure_Device_LAN.PNG)
-![Confiture_Device_Layer_2_Access](/docs/graphics/Configure_Device_Layer_2_Access.PNG)
+![Configure_Device_Layer_2_Access](/docs/graphics/Configure_Device_Layer_2_Access.PNG)
 
 Make sure the Device Scanner Service is running on the IED.
 
