@@ -27,7 +27,7 @@ The Machine Insight application enables you to extract the data from the differe
 
 This repository describes how to display important PLC data such as alarms or device status in Machine Insight.
 
-![overview](docs/graphics/Overview.png)
+![Overview](docs/graphics/Overview.png)
 
 ### General task
 
@@ -75,7 +75,7 @@ The used TIA Portal project can be found in the [miscellenous repository](https:
 
 You can find the further information about the following steps in the [docs](docs/Installation.md)
 - Configuration for Device Scanner Service
-- Configure PLC Connection (Databus, S7 Connector)
+- Configure PLC Connection (Databus, OPC UA Connector)
 - Configure Machine Insight
 
 ## Usage
