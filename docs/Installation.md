@@ -3,15 +3,15 @@
 - [Configuration](#configuration)
   - [Configuration for Device Scanner Service](#configuration-for-device-scanner-service)
   - [Configure PLC Connection](#configure-plc-connection)
-    - [Configure IE Databus](#configure-ie-databus)
-    - [Configure S7 Connector](#configure-s7-connector)
+    - [Configure Databus](#configure-databus)
+    - [Configure OPC UA Connector](#configure-opc-ua-connector)
   - [Configure Machine Insight](#configure-machine-insight)
 
 To run the Machine Insight application, all the following applications must be deployed and configured in **the same IED**:
 
 - Device Scanner Service (for scan functionality)
-- IE Databus (for machine status feature)
-- S7 Connector (for machine status feature)
+- Databus (for machine status feature)
+- OPC UA Connector (for machine status feature)
 - Machine Insight Configurator
 - Machine Insight
 
@@ -28,41 +28,41 @@ Make sure the Device Scanner Service is running on the IED.
 
 ## Configure PLC Connection
 
-The IE Databus is **optional** but required to be able to use the **machine status feature** in Machine Insight Configurator. To read data from the PLC, we will use the S7 Connector to establish a connection via OPC UA and publish the PLC data on the Databus.
+The IE Databus is **optional** but required to be able to use the **machine status feature** in Machine Insight Configurator. To read data from the PLC, we will use the OPC UA Connector to establish a connection via OPC UA and publish the PLC data on the Databus.
 
 In order to build this infrastructure, these apps must be configured properly:
 
-- IE Databus
-- S7 Connector
+- Databus
+- OPC UA Connector
 
 Hint: Username and password should be the same for all system apps, e.g. "edge" / "edge".
 
-### Configure IE Databus
+### Configure Databus
 
 In your IEM open the IE Databus and launch the configurator.
 
 Add a user with this topic:
 `"ie/#"`
 
-![ie_databus](/docs/graphics/IE_Databus.PNG)
+![databus](/docs/graphics/Databus.PNG)
 
 Deploy the configuration.
 
-### Configure S7 Connector
+### Configure OPC UA Connector
 
-In your IEM open the S7 Connector and launch the configurator.
+In your IEM open the OPC UAgit Connector and launch the configurator.
 
 Add a data source:
 
-![S7 Connector Data Source](/docs/graphics/S7_Connector_Data_Source.PNG)
+![OPC UA Connector Data Source](/docs/graphics/OPCUA_Connector_Data_Source.PNG)
 
 Add the needed tag for the machine status:
 
-![s7_connector_config](/docs/graphics/S7_Connector_Configuration.PNG)
+![opcua_connector_config](/docs/graphics/OPCUA_Connector_Configuration.PNG)
 
 Edit the settings:
 
-![s7_connector_settings](/docs/graphics/S7_Connector_Settings.PNG)
+![opcua_connector_settings](/docs/graphics/OPCUA_Connector_Settings.PNG)
 
 Deploy and start the project.
 

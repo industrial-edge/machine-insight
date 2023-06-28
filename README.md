@@ -65,7 +65,7 @@ Using Machine Insight the PLC data can be visualized and analyzed via a Gantt ch
 
 The **Device Scanner Service** is optional but required for using the scan functionality in Machine Insight Configurator.
 
-The **S7 Connector** and the **IE Databus** are optional but required for using the machine status feature in Machine Insight Configurator.
+The **OPC UA Connector** and the **Databus** are optional but required for using the machine status feature in Machine Insight Configurator.
 
 ### TIA Project
 
