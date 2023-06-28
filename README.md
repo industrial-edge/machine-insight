@@ -14,7 +14,8 @@ This guide shows how to use the Industrial Edge application Machine Insight.
   - [Usage](#usage)
   - [Documentation](#documentation)
   - [Contribution](#contribution)
-  - [Licence and Legal Information](#licence-and-legal-information)
+  - [Licence and Legal Information](#license-and-legal-information)
+  - [Disclaimer](#disclaimer)
 
 
 ## Description
