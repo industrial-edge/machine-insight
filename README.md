@@ -32,7 +32,7 @@ This repository describes how to setup the environment for using the Machine Ins
 ### General task
 
 For the remote diagnostic of a PLC via Machine Insight, it is required that the PLC and the IED are connected to the same network.
-Machine Insight collects the device data from the PLC via the S7+ Connector. This connector must be configured via the Common Configurator app. For retrieving the PLC alarms you need to create an asset structure and a dedicated alarm channel within the IIH Essentials app. Since Machine Insight is based on this asset structure, you can configure one PLC dashboard for each asset. For visualizing the machine status it is necessary to configure a status mapping within Machine Insight and assign the dedicated PLC parameter to the asset. Finally you can configure one or more assets to show the dedicated device and machine data:
+Machine Insight collects the device data from the PLC via the SIMATIC S7+ Connector. This connector must be configured via the Common Configurator app. For retrieving the PLC alarms you need to create an asset structure and a dedicated alarm channel within the IIH Essentials app. Since Machine Insight is based on this asset structure, you can configure one PLC dashboard for each asset. For visualizing the machine status it is necessary to configure a status mapping within Machine Insight and assign the dedicated PLC parameter to the asset. Finally you can configure one or more assets to show the dedicated device and machine data:
 - Machine status (via PLC variable and status mapping)
 - Device status (PLC status)
 - Device alarms (system/process/security alarms)
@@ -41,7 +41,7 @@ Machine Insight collects the device data from the PLC via the S7+ Connector. Thi
 **Important to know:**
 - V2.0 only supports S7-1500 PLCs
 - Max. 8 connected PLCs per app possible
-- S7+ Connector >= V1.4 necessary
+- SIMATIC S7+ Connector >= V1.4 necessary
 
 ## Requirements
 
@@ -52,6 +52,7 @@ Machine Insight collects the device data from the PLC via the S7+ Connector. Thi
 - Installed apps (see list "Used components")
 - IED is connected to PLC
 - TIA portal project loaded on PLC
+- Export of TIA portal project via SIMATIC SCADA Export available (.zip)
 - Google Chrome (Version ≥ 72)
 
 ### Used components
@@ -61,12 +62,15 @@ Machine Insight collects the device data from the PLC via the S7+ Connector. Thi
   - Common Connector Configurator V 1.10.1-2
 - Industrial Edge Device (IED) simatic-ipc-ied-os-2.1.0-22
   - Databus V 3.0.0
-  - S7+ Connector V 1.4.0
+  - SIMATIC S7+ Connector V 1.4.0
   - IIH Essentials V1.11.0
   - Common Configurator V 1.11.1
   - Registry Service V 1.11.0
+  - Common Import Converter V 2.2.0
   - Machine Insight V 2.0.0
 - PLC: CPU 1515F-2
+- TIA Portal V16
+- SIMATIC SCADA Export (V16) V2.0
 
 ### TIA Project
 
@@ -76,7 +80,7 @@ The used TIA Portal project can be found in the [miscellenous repository](https:
 
 You can find further information about the following steps in the [Configuration](docs/Installation.md) documentation:
 - Configuration of Databus
-- Configuration of S7+ Connector via Common Configurator
+- Configuration of SIMATIC S7+ Connector via Common Configurator
 - Configuration of IIH Essentials
 - Configuration of Machine Insight
 
