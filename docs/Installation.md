@@ -32,7 +32,7 @@ Therefore follow these steps:
 
 ## Configure SIMATIC S7+ Connector via Common Configurator
 
-To read data from the PLC, we will use the **SIMATIC S7+ Connector**. The connector configuration is done via the **Common Configurator**. Furthermore the apps **Registry Service** and **Common Import Converter** need to be launched on the IED.
+To read data from the PLC, the **SIMATIC S7+ Connector** must be used. The connector configuration is done via the **Common Configurator**. Furthermore the apps **Registry Service** and **Common Import Converter** need to be launched on the IED.
 
 The Common Configurator publishes the connector data on the Databus. Therefore, you must enter the Databus credentials within the Common Configurator:
 
@@ -44,7 +44,7 @@ The Common Configurator publishes the connector data on the Databus. Therefore, 
 - in tab 'Data Subscriber settings' enter the databus user name and password ('edge'/'edge')
 - save the settings
 
-![IIHDatabusSettings](/docs/graphics/IIHDatabusSettings.png]
+![IIHDatabusSettings](/docs/graphics/IIHDatabusSettings.png)
 
 As soon as the SIMATIC S7+ Connector is installed and started on the same IED as the Common Configurator, the connector is visible within the configurator. In this example we want to configure a S7+ connection to a CPU 1515F-2. It is required to have an SIMATIC SCADA export of the dedicated TIA project available (Export.zip).
 
@@ -78,8 +78,7 @@ For writing the tag values onto the MQTT databus you need to activate and confir
 
 Select the newly created PLC including all the tags and click 'Deploy' to save the configuration and start the project.
 
-**Important to know:**
-The alarms can only be activated when creating the data source. It is not possible to add them afterwards!
+> The alarms can only be activated when creating the data source. It is not possible to add them afterwards!
 
 ## Configure IIH Essentials
 
@@ -92,9 +91,7 @@ The app gathers all the necessary process data and saves it for a configured per
 
 - go to the tab 'Settings' and select 'Databus settings'
 - enter the databus service name: `ie-databus:1883`
-- enter the user name and password ('edge'/'edge')
-- save
-
+- enter the user name and password ('edge'/'edge') and save
 - go to the tab 'Connectors'
 - select the 'SIMATIC S7 Plus Connector'
 - activate and save
@@ -110,7 +107,7 @@ To add the PLC parameter for the machine state, proceed as following:
 - select the machine state parameter
 - add variable
 
-![IIHEssentialsParameter](/docs/graphics/IIEssentialsParameter.png)
+![IIHEssentialsParameter](/docs/graphics/IIHEssentialsParameter.png)
 
 For this asset we also need to create an alarm channel for getting the alarm data out of the PLC:
 
@@ -120,8 +117,7 @@ For this asset we also need to create an alarm channel for getting the alarm dat
 
 ![IIHEssentialsAlarmChannel](/docs/graphics/IIHEssentialsAlarmChannel.png)
 
-**Important to know:**
-It is essential to have **only one source selected** on the alarm channel. Otherwise no device status will be displayed within Machine Insight!
+> It is essential to have **only one source selected** on the alarm channel. Otherwise no device status will be displayed within Machine Insight!
 
 ## Configure Machine Insight
 

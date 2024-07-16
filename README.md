@@ -39,6 +39,7 @@ Machine Insight collects the device data from the PLC via the SIMATIC S7+ Connec
 - Device updates (PLC changes, e.g. SW program update)
 
 **Important to know:**
+
 - V2.0 only supports S7-1500 PLCs
 - Max. 8 connected PLCs per app possible
 - SIMATIC S7+ Connector >= V1.4 necessary
