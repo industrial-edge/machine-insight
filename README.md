@@ -79,11 +79,12 @@ The used TIA Portal project can be found in the [miscellenous repository](https:
 
 ## Configuration steps
 
-You can find further information about the following steps in the [Configuration](docs/Installation.md) documentation:
-- Configuration of Databus
-- Configuration of SIMATIC S7+ Connector via Common Configurator
-- Configuration of IIH Essentials
-- Configuration of Machine Insight
+You can find further information about the following steps in the [Configuration](/docs/Installation.md) documentation:
+
+- [Configure Databus](/docs/Installation.md#configure-databus)
+- [Configure SIMATIC S7+ Connector](/docs/Installation.md#configure-simatic-s7-connector)
+- [Configure IIH Essentials](/docs/Installation.md#configure-iih-essentials)
+- [Configure Machine Insight](/docs/Installation.md#configure-machine-insight)
 
 ## Usage
 
