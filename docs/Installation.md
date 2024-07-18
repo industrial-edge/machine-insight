@@ -10,15 +10,15 @@
 
 To run the Machine Insight application, the following applications must be deployed on **the same IED**:
 
-|  | |
-| ------ | ----------- |
-| Databus | MQTT broker |
-| SIMATIC S7+ Connector | provide machine status parameter, retrieve alarms |
-| Common Configurator | configure SIMATIC S7+ connector |
-| Registry Service | register SIMATIC S7+ connector |
-| Common Import Converter | import S7+ tags |
-| IIH Essentials | define asset structure, create alarm channels |
-| Machine Insight | dashboards with machine data |
+- Databus (MQTT broker)
+- SIMATIC S7+ Connector (provide machine status parameter, retrieve alarms)
+- Common Configurator (configure SIMATIC S7+ connector)
+- Registry Service (register SIMATIC S7+ connector)
+- Common Import Converter (import S7+ tags)
+- IIH Essentials (define asset structure, create alarm channels)
+- Machine Insight (dashboards with machine data)
+
+> HINT: If you upgraded from an older version of Machine Insight to V2.0, it is necessary to manually uninstall the app Machine Insight Configurator after migration. This app is not needed any more.
 
 ## Configure Databus
 
@@ -29,7 +29,7 @@ Therefore follow these steps:
 - open the Industrial Edge Management (IEM)
 - go to 'Data Connections' > Databus
 - select the corresponding IED and launch
-- create a new user ('edge'/'edge') with the dedicated topic `ie/#` and set the permissions to 'Publish and Subscribe'
+- create a new user (`edge`/`edge`) with the dedicated topic `ie/#` and set the permissions to 'Publish and Subscribe'
 - deploy the configuration and wait for the job to be finished successfully
 
 ![databus](/docs/graphics/Databus.PNG)
@@ -43,9 +43,9 @@ The Common Configurator publishes the connector data on the Databus. Therefore, 
 - open the IED web interface
 - open the app Common Configurator
 - go to the tab 'Settings' and select the menu 'Databus credentials'
-- enter the databus service name: 'ie-databus:1883'
-- in tab 'Data Publisher settings' enter the databus user name and password ('edge'/'edge')
-- in tab 'Data Subscriber settings' enter the databus user name and password ('edge'/'edge')
+- enter the databus service name: `ie-databus:1883`
+- in tab 'Data Publisher settings' enter the databus user name and password (`edge`/`edge`)
+- in tab 'Data Subscriber settings' enter the databus user name and password (`edge`/`edge`)
 - save the settings
 
 ![IIHDatabusSettings](/docs/graphics/IIHDatabusSettings.png)
@@ -60,7 +60,7 @@ As soon as the SIMATIC S7+ Connector is installed and started on the same IED as
 - select the Export.zip from the SIMATIC SCADA Export of the TIA project
 - add a name and the IP address of the PLC
 - select the option 'Provide PLC alarms'
-- click 'Continue to "Select tags"'
+- click 'Continue to Select tags'
 
 ![DataSource](/docs/graphics/IIHDataSource.png)
 
@@ -95,7 +95,7 @@ The app gathers all the necessary process data and saves it for a configured per
 
 - go to the tab 'Settings' and select 'Databus settings'
 - enter the databus service name: `ie-databus:1883`
-- enter the user name and password ('edge'/'edge') and save
+- enter the user name and password (`edge`/`edge`) and save
 - go to the tab 'Connectors'
 - select the 'SIMATIC S7 Plus Connector'
 - activate and save
@@ -170,7 +170,7 @@ Click on the 'App Configuration' button to switch to the configuration tab of Ma
 
 ### Configuration
 
-Within Machine Insight you are able to configure a **status mapping** for the machine state, which is later used to visualize the status in a Gantt chart:
+Within Machine Insight you are able to configure a **status mapping** for the machine state, which is later necessary to visualize the status in a Gantt chart:
 
 - switch to tab 'Configuration' within the left-side menu
 - click 'Go to Status mappings' and create a new mapping
@@ -179,8 +179,6 @@ Within Machine Insight you are able to configure a **status mapping** for the ma
 - save the mapping
 
 ![MachineInsightStatusMapping](/docs/graphics/MachineInsightStatusMapping.png)
-
-You can create several status mappings for different kind of machine states!
 
 Machine Insight is based on the asset structure that was defined within IIH Essentials. Finally, you need to configure the assets for which a machine data dashboard should be shown within Machine Insight.
 
@@ -193,4 +191,4 @@ Machine Insight is based on the asset structure that was defined within IIH Esse
 
 ![MachineInsightAssetConfig](/docs/graphics/MachineInsightAssetConfig.png)
 
-...
+Now Machine Insight will automatically generate one dashboard per configured assset. Please find more information in the [Usage](/README.md#usage) chapter.
