@@ -22,7 +22,7 @@ To run the Machine Insight application, the following applications must be deplo
 
 ## Configure Databus
 
-The **Databus** acts as MQTT broker and is essential to exchange data between a PLC and the IED via a connector. You need to create an user and one or more topics in the Databus configuration, which cover the process data.
+The **Databus** acts as MQTT broker and is essential to exchange data between a PLC and the IED via the SIMATIC S7+ Connector. You need to create an user and one or more topics in the Databus configuration, which cover the process data.
 
 Therefore follow these steps:
 
@@ -38,7 +38,7 @@ Therefore follow these steps:
 
 To read data from the PLC, the **SIMATIC S7+ Connector** must be used. The connector configuration is done via the **Common Configurator**. Furthermore the apps **Registry Service** and **Common Import Converter** need to be launched on the IED.
 
-The Common Configurator publishes the connector data on the Databus. Therefore, you must enter the Databus credentials within the Common Configurator:
+The Common Configurator publishes the connector data on the Databus. Therefore, you must enter the Databus credentials ('edge'/'edge') within the Common Configurator:
 
 - open the IED web interface
 - open the app Common Configurator
@@ -50,7 +50,9 @@ The Common Configurator publishes the connector data on the Databus. Therefore, 
 
 ![IIHDatabusSettings](/docs/graphics/IIHDatabusSettings.png)
 
-As soon as the SIMATIC S7+ Connector is installed and started on the same IED as the Common Configurator, the connector is visible within the configurator. In this example we want to configure a S7+ connection to a CPU 1515F-2. It is required to have an SIMATIC SCADA export of the dedicated TIA project available (Export.zip).
+As soon as the SIMATIC S7+ Connector is installed and started on the same IED as the Common Configurator, the connector is visible within the configurator. In this example we want to configure a S7+ connection to a CPU 1515F-2. It is required to have an SIMATIC SCADA Export of the dedicated TIA project available (Export.zip).
+
+You can find detailled information how to use the SIMATIC SCADA Export for TIA Portal [here](https://support.industry.siemens.com/cs/document/109748955/simatic-scada-export-for-tia-portal?dti=0&lc=en-WW).
 
 - go to the tab 'Get data'
 - select the SIMATIC S7+ Connector
@@ -91,7 +93,7 @@ Within **IIH Essentials** you can define the asset structure for your plant:
 - open the app IIH Essentials
 - create the asset hirarchy accordingly
 
-The app gathers all the necessary process data and saves it for a configured period of time. In this case we need to get data out of the S7+ Connector, therefore this must be activated:
+The app gathers all the necessary process data and saves it for a configured period of time. In this case we need to get data out of the SIMATIC S7+ Connector, therefore this must be activated:
 
 - go to the tab 'Settings' and select 'Databus settings'
 - enter the databus service name: `ie-databus:1883`
@@ -107,7 +109,7 @@ To add the **PLC parameter** for the machine state, proceed as following:
 - go to tab 'Assets & Connectivity'
 - select the dedicated asset
 - clickt 'Create first variable'
-- select the SIMATIC S7 Plus Connector
+- select the 'SIMATIC S7 Plus Connector'
 - select the machine state parameter
 - add variable
 
