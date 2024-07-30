@@ -21,19 +21,29 @@ This guide shows how to use the Industrial Edge application Machine Insight.
 
 ### Overview
 
-The application Machine Insight is a condition monitoring application which enables easy and efficient remote diagnosis of the machines. It provides global comprehensive view of assembly lines and machines and provides transparency about your machine to improve your service processes.
+The application Machine Insight is a **condition monitoring** application which enables easy and efficient **remote diagnosis** of the machines. It provides global comprehensive view of assembly lines and machines, and provides transparency about your machine with worldwide access to machine conditions and events to improve your service processes.
 
-The Machine Insight application enables you to extract the data from the different sources. The data may be of different types: device status data, machine status data, alarms, diagnostic buffer data, and program changes or firmware updates on PLC.
+The Machine Insight application enables you to gather different types of diagnostic information: machine status, PLC status, PLC alarms and PLC updates (e.g. program changes, firmware updates). The data is visualized within an intuitive user interface with Gantt chart, notification icons and a log book.
 
-This repository describes how to display important PLC data such as alarms or device status in Machine Insight.
+This repository describes how to setup the environment for using the Machine Insight app. The goal is to display all the important device data for the connected PLC.
 
-![Overview](docs/graphics/Overview.png)
+<img src="docs/graphics/Overview.png" width=600 />
 
 ### General task
 
-The guide shows how to use the Machine Insight Configurator for configuring the data exchange with a PLC. Data collection can be configured either for alarms or for diagnostic buffer. Furthermore a status mapping is created to collect machine status data. The data comes in via the S7 Connector and then published on the Databus, where the Machine Insight Configurator can retrieve the required data.
+For the remote diagnostic of a PLC via Machine Insight, it is required that the PLC and the IED are connected to the same network.
+Machine Insight collects the device data from the PLC via the SIMATIC S7+ Connector. This connector must be configured via the Common Configurator app. For retrieving the PLC alarms you need to create an asset structure and a dedicated alarm channel within the IIH Essentials app. Since Machine Insight is based on this asset structure, you can configure one PLC dashboard for each asset to show the dedicated device and machine data:
 
-Using Machine Insight the PLC data can be visualized and analyzed via a Gantt chart. Here you can see differnet PLC data, e.g. diagnostic buffer data, alarms, device status or firmware updates.
+- Machine status (via PLC variable and status mapping)
+- Device status (PLC status)
+- Device alarms (system/process/security alarms)
+- Device updates (PLC changes, e.g. SW program update)
+
+**Important to know:**
+
+- V2.0 only supports S7-1500 PLCs
+- Max. 8 connected PLCs per app possible
+- SIMATIC S7+ Connector >= V1.4 necessary
 
 ## Requirements
 
@@ -41,31 +51,27 @@ Using Machine Insight the PLC data can be visualized and analyzed via a Gantt ch
 
 - Access to an Industrial Edge Management (IEM) with onboarded Industrial Edge Device (IED)
 - Installed system configurators and apps (see list "Used components")
-- Installed apps (see list "Used components")
 - IED is connected to PLC
 - TIA portal project loaded on PLC
+- Export of TIA portal project via SIMATIC SCADA Export available (.zip)
 - Google Chrome (Version ≥ 72)
 
 ### Used components
 
-- Industrial Edge Management (IEM) V 1.5.2-4 / V 1.11.8
-  - Databus Configurator V 2.0.0-5
-  - Common Connector Configurator V 1.8.1-4
-- Industrial Edge Device (IED) V 1.10.0.-9
-  - Databus V 2.1.0-4
-  - OPC UA Connector V 1.8.1-6
-  - Device Scanner Service V 1.6.0
-  - Machine Insight Conifgurator V 1.3.2
-  - Machine Insight V 1.3.2
-- Industrial Edge App Publisher V 1.10.5
-- Docker Engine V 20.10.10
-- Docker Compose V 1.28.5
-- TIA Portal V16
+- Industrial Edge Management (IEM) V 1.5.5-2 / V 1.16.11
+  - Databus Configurator V 3.0.0
+  - Common Connector Configurator V 1.10.1-2
+- Industrial Edge Device (IED) simatic-ipc-ied-os-2.1.0-22
+  - Databus V 3.0.0
+  - SIMATIC S7+ Connector V 1.4.0
+  - IIH Essentials V1.11.0
+  - Common Configurator V 1.11.1
+  - Registry Service V 1.11.0
+  - Common Import Converter V 2.2.0
+  - Machine Insight V 2.0.0
 - PLC: CPU 1515F-2
-
-The **Device Scanner Service** is optional but required for using the scan functionality in Machine Insight Configurator.
-
-The **OPC UA Connector** and the **Databus** are optional but required for using the machine status feature in Machine Insight Configurator.
+- TIA Portal V16
+- SIMATIC SCADA Export (V16) V2.0
 
 ### TIA Project
 
@@ -73,32 +79,51 @@ The used TIA Portal project can be found in the [miscellenous repository](https:
 
 ## Configuration steps
 
-You can find the further information about the following steps in the [docs](docs/Installation.md)
-- Configuration for Device Scanner Service
-- Configure PLC Connection (Databus, OPC UA Connector)
-- Configure Machine Insight
+You can find further information about the following steps in the [Configuration](/docs/Installation.md) documentation:
+
+- [Configure Databus](/docs/Installation.md#configure-databus)
+- [Configure SIMATIC S7+ Connector](/docs/Installation.md#configure-simatic-s7-connector)
+- [Configure IIH Essentials](/docs/Installation.md#configure-iih-essentials)
+- [Configure Machine Insight](/docs/Installation.md#configure-machine-insight)
 
 ## Usage
 
-Once the set up is done with the Machine Insight Configurator, you can open the UI of the Machine Insight application.
+Once the configuration is done, you can use the autogenerated dashboards within Machine Insight for remote diagnostic of the connected devices. The app offers a Gantt chart combined with notifications and a log book for each configured asset:
 
-Select your device in the menu on the left side. In the overview tab you can see a Gantt chart and logbook records. The Gantt chart displays the following data:
+- open the IED web interface
+- open the app Machine Insight
 
-- Machine status based on configured status mapping
-- Current device status of PLC
-- Notification icons (alarm data, user program change, hardware configuration change, firmware update, textlist change, fail-safe program change)
+![DeviceEntryMachineInsight](/docs/graphics/DeviceEntryMachineInsight.png)
 
-![Machine_Insight_Overview](/docs/graphics/Machine_Insight_Overview.PNG)
+- switch to tab 'My Plant' within the left-side menu
+- navigate to the asset which was configured (here 'CPU 1515F-2 PN')
+- the dedicated dashboard is shown
 
-> Hint: PLC notifications are collected for every ten seconds and diagnostic buffer data is collected for every minute. Therefore, you may experience a delay in the Gantt chart or in the logbook.
+![MachineInsightOverviewUI](/docs/graphics/MachineInsightOverviewUI.png)
 
-The Gantt chart allows you to zoom in and view e.g. the machine status in detail.
+The Gantt chart displays the following data:
 
-![Machine_Insight_Machine_Status](/docs/graphics/Machine_Insight_Machine_Status.png)
+- Machine status via dedicated PLC variable, based on configured status mapping
+- Device status of PLC
+- Notification icons to indicate alarms (only incoming alarms)
 
-By clicking on 'Legend' within the Gantt chart, you can see all current states.
+If more than one event occurs in a short span of time, the aggregated data is displayed. You can zoom into the dashboard for detailed view. When hovering on the icon, the tool tip provides the description of the dedicated event.
 
-![Machine_Insight_Legend](/docs/graphics/Machine_Insight_Legend.png)
+![MachineInsightExample1](/docs/graphics/MachineInsightExample1.png)
+
+When clicking on 'Details' you get more detailled information about the machine and device status.
+
+When clicking on 'Legend' you get an overview of the machine and device status colors and of the notification icons.
+
+![MachineInsightLegend](/docs/graphics/MachineInsightLegend.png)
+
+The log book provides the two tabs 'Device Alarms' and 'Device Updates'. Under 'Device Alarms' you see the 4 latest incomming alarms from the PLC. Under 'Device Updates' you see the 4 latest updates on the PLC. This covers program updates, hardware updates, firmware updates, textlist updates and safety updates.
+
+When clicking on 'View Log Book' you get the overall list of incoming alarms (history).
+
+![MachineInsightExample2](/docs/graphics/MachineInsightExample2.png)
+
+> Hint: The dashboard is only plotted till the last access of the asset. It does not refresh automatically over time. The polling frequency for the device status is 15 seconds. Status changes will only be visualized with this frequency.
 
 ## Documentation
 - You can find further documentation and help in the following links

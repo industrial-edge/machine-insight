@@ -1,111 +1,196 @@
-# Configuration
+# Configurations
 
-- [Configuration](#configuration)
-  - [Configuration for Device Scanner Service](#configuration-for-device-scanner-service)
-  - [Configure PLC Connection](#configure-plc-connection)
-    - [Configure Databus](#configure-databus)
-    - [Configure OPC UA Connector](#configure-opc-ua-connector)
+- [Configurations](#configurations)
+  - [Configure Databus](#configure-databus)
+  - [Configure SIMATIC S7+ Connector](#configure-simatic-s7-connector)
+  - [Configure IIH Essentials](#configure-iih-essentials)
   - [Configure Machine Insight](#configure-machine-insight)
+    - [Migration](#migration)
+    - [Configuration](#configuration)
 
-To run the Machine Insight application, all the following applications must be deployed and configured in **the same IED**:
+To run the Machine Insight application, the following applications must be deployed on **the same IED**:
 
-- Device Scanner Service (for scan functionality)
-- Databus (for machine status feature)
-- OPC UA Connector (for machine status feature)
-- Machine Insight Configurator
-- Machine Insight
+- Databus (MQTT broker)
+- SIMATIC S7+ Connector (provide machine status parameter, retrieve alarms)
+- Common Configurator (configure SIMATIC S7+ connector)
+- Registry Service (register SIMATIC S7+ connector)
+- Common Import Converter (import S7+ tags)
+- IIH Essentials (define asset structure, create alarm channels)
+- Machine Insight (dashboards with machine data)
 
-## Configuration for Device Scanner Service
+> HINT: If you upgraded from an older version of Machine Insight to V2.0, it is necessary to manually uninstall the app Machine Insight Configurator after migration. This app is not needed any more.
 
-The Device Scanner Service is **optional** but required to be able to use the **scan functionality** in Machine Insight Configurator. It requires a specific network configuration called **Layer-2-Access** on the IED to work properly. Here you define an address pool used by Docker to configure a container IP address for the Device Scanner Service.
+## Configure Databus
 
-To configure the Layer-2-Access, open the UI of the IED and in the menu go to Settings > Connectivity > LAN Network. For the network interface, that is connected to the PLC, the Layer-2-Access must be configured. Click the corresponding edit icon for that interface and add the needed.
+The **Databus** acts as MQTT broker and is essential to exchange data between a PLC and the IED via the SIMATIC S7+ Connector. You need to create an user and one or more topics in the Databus configuration, which cover the process data.
 
-![Configure device LAN](/docs/graphics/Configure_Device_LAN.PNG)
-![Configure_Device_Layer_2_Access](/docs/graphics/Configure_Device_Layer_2_Access.PNG)
+Therefore follow these steps:
 
-Make sure the Device Scanner Service is running on the IED.
-
-## Configure PLC Connection
-
-The IE Databus is **optional** but required to be able to use the **machine status feature** in Machine Insight Configurator. To read data from the PLC, we will use the OPC UA Connector to establish a connection and publish the PLC data on the Databus.
-
-In order to build this infrastructure, these apps must be configured properly:
-
-- Databus
-- OPC UA Connector
-
-Hint: Username and password should be the same for all system apps, e.g. "edge" / "edge".
-
-### Configure Databus
-
-In your IEM open the IE Databus and launch the configurator.
-
-Add a user with this topic:
-`"ie/#"`
+- open the Industrial Edge Management (IEM)
+- go to 'Data Connections' > Databus
+- select the corresponding IED and launch
+- create a new user (`edge`/`edge`) with the dedicated topic `ie/#` and set the permissions to 'Publish and Subscribe'
+- deploy the configuration and wait for the job to be finished successfully
 
 ![databus](/docs/graphics/Databus.PNG)
 
-Deploy the configuration.
+## Configure SIMATIC S7+ Connector
 
-### Configure OPC UA Connector
+To read data from the PLC, the **SIMATIC S7+ Connector** must be used. The connector configuration is done via the **Common Configurator**. Furthermore the apps **Registry Service** and **Common Import Converter** need to be launched on the IED.
 
-In your IEM open the OPC UAgit Connector and launch the configurator.
+The Common Configurator publishes the connector data on the Databus. Therefore, you must enter the Databus credentials ('edge'/'edge') within the Common Configurator:
 
-Add a data source:
+- open the IED web interface
+- open the app Common Configurator
+- go to the tab 'Settings' and select the menu 'Databus credentials'
+- enter the databus service name: `ie-databus:1883`
+- in tab 'Data Publisher settings' enter the databus user name and password (`edge`/`edge`)
+- in tab 'Data Subscriber settings' enter the databus user name and password (`edge`/`edge`)
+- save the settings
 
-![OPC UA Connector Data Source](/docs/graphics/OPCUA_Connector_Data_Source.PNG)
+![IIHDatabusSettings](/docs/graphics/IIHDatabusSettings.png)
 
-Add the needed tag for the machine status:
+As soon as the SIMATIC S7+ Connector is installed and started on the same IED as the Common Configurator, the connector is visible within the configurator. In this example we want to configure a S7+ connection to a CPU 1515F-2. It is required to have an SIMATIC SCADA Export of the dedicated TIA project available (Export.zip).
 
-![opcua_connector_config](/docs/graphics/OPCUA_Connector_Configuration.PNG)
+You can find detailled information how to use the SIMATIC SCADA Export for TIA Portal [here](https://support.industry.siemens.com/cs/document/109748955/simatic-scada-export-for-tia-portal?dti=0&lc=en-WW).
 
-Edit the settings:
+- go to the tab 'Get data'
+- select the SIMATIC S7+ Connector
+- switch to tab 'Tags'
+- add a new data source
+- choose 'add from file'
+- select the Export.zip from the SIMATIC SCADA Export of the TIA project
+- add a name and the IP address of the PLC
+- select the option 'Provide PLC alarms'
+- click 'Continue to Select tags'
 
-![opcua_connector_settings](/docs/graphics/OPCUA_Connector_Settings.PNG)
+![DataSource](/docs/graphics/IIHDataSource.png)
 
-Deploy and start the project.
+- select an acquisition cycle and a access mode in the drop down fields
+- select the parameter that represents the machine state
+- click 'Import'
+
+![DataSource2](/docs/graphics/IIHDataSource2.png)
+
+For writing the tag values onto the MQTT databus you need to activate and confirm the 'Publish on the databus' option for each tag:
+
+- select the parameter
+- click on the edit icon of the parameter
+- activate the option 'publish on the databus'
+- select an acquisition cycle 
+- accept the settings
+
+![DataSource3](/docs/graphics/IIHDataSource3.png)
+
+Select the newly created PLC including all the tags and click 'Deploy' to save the configuration and start the project.
+
+> IMPORTANT: The alarms can only be activated when creating the data source. It is not possible to add them afterwards!
+
+## Configure IIH Essentials
+
+Within **IIH Essentials** you can define the asset structure for your plant: 
+
+- open the app IIH Essentials
+- create the asset hirarchy accordingly
+
+The app gathers all the necessary process data and saves it for a configured period of time. In this case we need to get data out of the SIMATIC S7+ Connector, therefore this must be activated:
+
+- go to the tab 'Settings' and select 'Databus settings'
+- enter the databus service name: `ie-databus:1883`
+- enter the user name and password (`edge`/`edge`) and save
+- go to the tab 'Connectors'
+- select the 'SIMATIC S7 Plus Connector'
+- activate and save
+
+![IIHEssentialsAdaper](/docs/graphics/IIHEssentialsAdapter.png)
+
+To add the **PLC parameter** for the machine state, proceed as following:
+
+- go to tab 'Assets & Connectivity'
+- select the dedicated asset
+- clickt 'Create first variable'
+- select the 'SIMATIC S7 Plus Connector'
+- select the machine state parameter
+- add variable
+
+![IIHEssentialsParameter](/docs/graphics/IIHEssentialsParameter.png)
+
+For this asset we also need to create an **alarm channel** for getting the alarm data out of the PLC:
+
+- within the asset, select the tab 'Alarms'
+- select 'Create first alarm channel'
+- enter a name for the alarm channel
+- select the 'SIMATIC S7 Plus Connector'
+- select only one source from your configured S7+ Connector PLCs
+- select a proper alarm type
+
+![IIHEssentialsAlarmChannel](/docs/graphics/IIHEssentialsAlarmChannel.png)
+
+> IMPORTANT: It is essential to have **only one source selected** on the alarm channel. Otherwise no device status will be displayed within Machine Insight!
 
 ## Configure Machine Insight
 
-The Machine Insight Configurator provides the user interface to configure the Machine Insight application for data extraction from field devices and to collect machine status from a different application and store it in database.
+### Migration
 
-In your IED open the Machine Insight Configurator.
+Machine Insight V2.0 shows an entry page if you open the UI. In case you updated an existing app version to V2.0 you are able to follow a migration wizzard.
 
-Click "Add New Device" and choose "Scan and Add" to automatically scan the network for all available devices in the network. If you are looking for a specific device with name and IP, choose "Manually Add".
+![MachineInsightEntryPage](/docs/graphics/MachineInsightEntryPage.png)
 
-![Machine_Insight_Configurator](/docs/graphics/Machine_Insight_Configurator.PNG)
+In case of a new Machine Inight installation, no migrtion is necessary and only the 'Configuration' option will appear in the entry page.
 
-In the scan configuration window enter the following information:
+**Step Get Data**
 
-- Service Name: industrial-device-scanner (should be prefilled)
-- Port: 50020 (should be prefilled)
-- IP range From and To: enter IP adresses in which to be scanned for devices
+Click on the ‘Get Data’ button to open the Common Configurator for configuring the SIMATIC S7+ Connector. See chapter [Configure SIMATIC S7+ Connector](#configure-simatic-s7-connector).
 
-Click on "Start Scan" and select a device on which to connect to.
+![MachineInsightMigration1](/docs/graphics/MachineInsightMigration1.png)
 
-![Machine_Insight_Scan](/docs/graphics/Machine_Insight_Scan.png)
+**Step Alarm Channel**
 
-To be able to subscribe to the dedicated machine status data from the Databus, expand the 'Configure Global Device Settings' and under section 'Databus Configuration' enter your databus username and password.
+Click on the ‘Alarm Channel’ button to open IIH Essentials for defining the asset hierarchy and the alarm channels. See chapter [Configure IIH Essentials](#configure-iih-essentials).
 
-![Machine_Insight_Global_Config](/docs/graphics/Machine_Insight_Global_Config.png)
+![MachineInsightMigration2](/docs/graphics/MachineInsightMigration2.png)
 
-For the added device, go to column 'Status Mapping' and click 'Create new' to create a new mapping for the machine status. Assign a name to the status mapping and define proper values and labels for this status mapping.
+**Step Data Migration**
 
-![Machine_Insight_Status_Mapping](/docs/graphics/Machine_Insight_StatusMapping.png)
+Here you are able to transfer previously configured PLCs to the new version:
 
-Back in the global settings window, select the just created status mapping for the device. To assign a tag for the machine state, click the folder icon under 'Actions'.
+- select all the PLCs that need to be transfered
+- select a dedicated asset for each PLC for mapping
+- click 'Validate' (the selected assets should have a source and alarm channel configured)
+- after successful validation click 'Start Migration'
+- data of selected PLCs is transferred to mapped asset (running in background)
 
-If you choose the meta data topic for the S7 Connector and the according connection, all available tags are listed. Select the proper tag for the machine status.
+![MachineInsightMigration3](/docs/graphics/MachineInsightMigration3.png)
 
-![Machine_Insight_Tags](/docs/graphics/Machine_Insight_Tags.png)
+> IMPORTANT: This step is optional and can be performed only once! Therefore ensure that all needed PLCs are selected!
 
-Finally select the device and continue to 'Settings' at the top right.
+**Step Configuration**
 
-![Machine_Insight_Overall_Config](/docs/graphics/Machine_Insight_Overall_Config.png)
+Click on the 'App Configuration' button to switch to the configuration tab of Machine Insight. See chapter [Configuration](#configuration).
 
-Under tab 'General' you can change general settings like language or the time zone. Under tab 'Diagnostic Data' you can define the number of diagnostic events that are retained. Furthermore you can select the diagnostic events data type for which the data is extracted (Diagnostic Buffer OR Alarms).
+![MachineInsightMigration4](/docs/graphics/MachineInsightMigration4.png)
 
-To apply all settings, click on "Update" in the top right corner.
+### Configuration
 
-To open the Machine Insight view, you can click on "Go to App" or open the UI of the application via the IED.
+Within Machine Insight you are able to configure a **status mapping** for the machine state, which is later necessary to visualize the status in a Gantt chart:
+
+- switch to tab 'Configuration' within the left-side menu
+- click 'Go to Status mappings' and create a new mapping
+- enter a name and a description (optional)
+- setup the mapping by assigning each value of the machine status to a dedicated text label with unique color
+- save the mapping
+
+![MachineInsightStatusMapping](/docs/graphics/MachineInsightStatusMapping.png)
+
+Machine Insight is based on the asset structure that was defined within IIH Essentials. Finally, you need to configure the assets for which a machine data dashboard should be shown within Machine Insight.
+
+- switch to tab 'Configuration' within the left-side menu
+- click 'Go to Asset Configuration'
+- navigate to the asset for which you want to create a dashboard
+- click 'Find parameter' to assign the belonging machine status variable
+- select the dedicated status mapping via the drop down box
+- save the settings
+
+![MachineInsightAssetConfig](/docs/graphics/MachineInsightAssetConfig.png)
+
+Now Machine Insight will automatically generate one dashboard per configured assset. Please find more information in the [Usage](/README.md#usage) chapter.
